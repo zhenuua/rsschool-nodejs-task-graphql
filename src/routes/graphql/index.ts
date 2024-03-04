@@ -6,10 +6,10 @@ import {
   graphql,
   validate,
   parse,
-  GraphQLObjectType,
 } from 'graphql';
 import depthLimit from 'graphql-depth-limit';
 import { query } from './graphQLObjectTypes/query.js';
+import { mutation } from './graphQLObjectTypes/mutation.js';
 
 
 const DEPTH_LIMIT = 5;
@@ -17,11 +17,6 @@ const DEPTH_LIMIT = 5;
 const plugin: FastifyPluginAsyncTypebox = async (fastify) => {
   const prisma = new PrismaClient();
 
-  const mutation = new GraphQLObjectType({
-    name: 'Mutation',
-    fields: {
-    }
-  });
   const graphQLSchema = new GraphQLSchema({ query, mutation });
 
   fastify.route({
